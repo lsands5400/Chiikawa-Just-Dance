@@ -31,7 +31,7 @@ module decodeScoreLCD_tb();
 	else 
 		$error("Score decoder test 2 failed."); 
 	
-	char = 56000;
+	score = 56000;
 	#10;                        // wait required time
 	assert (b == 0'b0011_0101_0011_0110_0011_0000_0011_0000_0011_0000)       // check outputs
 	else 

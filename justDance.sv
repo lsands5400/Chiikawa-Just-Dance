@@ -3,7 +3,7 @@
 // 11-14-2026
 // This is the game module for the Chiikawa Just Dance game. 
 module justDance(input logic start,
-                    input logic string, 
+                    input logic category, 
                     output logic lcd);
     
     // Address select
