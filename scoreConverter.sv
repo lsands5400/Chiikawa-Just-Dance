@@ -17,29 +17,28 @@ module scoreConverter(input logic clk,
             // Perfect
             0'h50_65_72_66_65_63_74: 
                 if (same) begin
-                    // TODO: Where is this initialized to 1?
-                    combo = combo + 1;
-                    scoreAddend = 3000*combo;
+                    comboOut = comboIn + 1;
+                    scoreAddend = 3000*comboOut;
                 end
                 else begin
-                    combo = 0;
+                    comboOut = 0;
                     scoreAddend = 3000;
                 end
 
             // Good
             0'h47_6F_6F_64:
                 scoreAddend = 2000;
-                combo = 0;
+                comboOut = 0;
 
             // OK
             0'h4F_4B:
                 scoreAddend = 1000;
-                combo = 0;
+                comboOut = 0;
 
             // Miss 
             0'h4D_69_73_73:
                 scoreAddend = 0;
-                combo = 0;
+                comboOut = 0;
         endcase
     
     assign addrSel = 0;
