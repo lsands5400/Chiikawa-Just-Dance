@@ -1,9 +1,9 @@
 // Lindsey Sands
 // lsands@g.hmc.edu
 // 11-10-2026
-// This is the LCD decoder module
+// This is the LCD decoder module for a single char
 
-module decodeLCD (input logic char,
+module decodeCharLCD (input logic[7:0] char,
                     output logic[7:0] b);
 
     // char is the associated ASCII value
