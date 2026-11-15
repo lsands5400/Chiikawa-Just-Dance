@@ -5,15 +5,18 @@
 // It takes the char[] input from the MCU and converts it to a score.
 module scoreConverter(input logic clk,
                         input logic chars,
-                        input logic prevChars,
+                        input logic comboIn,
+                        input logic same,
+
+                        output logic addrSel,
                         output logic scoreAddend,
-                        output logic combo);
+                        output logic comboOut);
 
     always_comb
         case(chars)
             // Perfect
             0'h50_65_72_66_65_63_74: 
-                if (prevChars == chars) begin
+                if (same) begin
                     // TODO: Where is this initialized to 1?
                     combo = combo + 1;
                     scoreAddend = 3000*combo;
@@ -39,4 +42,5 @@ module scoreConverter(input logic clk,
                 combo = 0;
         endcase
     
+    assign addrSel = 0;
 endmodule
