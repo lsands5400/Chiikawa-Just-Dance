@@ -7,8 +7,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define LSM6DSOX_I2C_ADDR_DEFAULT   0x6AU
-#define LSM6DSOX_WHO_AM_I_EXPECTED  0x6CU
+#define LSM6DSOX_I2C_ADDR_DEFAULT   0x6A
+#define LSM6DSOX_WHO_AM_I_EXPECTED  0x6C
 
 // Holds calibrated physical acceleration (g) and angular velocity (deg/s)
 typedef struct {
