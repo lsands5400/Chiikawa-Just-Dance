@@ -19,10 +19,10 @@
 #define LOW 0
 
 // LSM6DSOX identification constants 
-#define LSM6DSOX_I2C_ADDR       0x6AU  // 7-bit I2C address when SA0 pin is held LOW
-#define LSM6DSOX_REG_WHO_AM_I   0x0FU  // Read-only device identification register address
-#define LSM6DSOX_WHO_AM_I_VAL   0x6CU  // Fixed factory ID value stored in WHO_AM_I
-#define SINGLE_BYTE_LEN         1U     // Number of bytes for register pointer and ID read
+#define LSM6DSOX_I2C_ADDR       0x6A  // 7-bit I2C address when SA0 pin is held LOW
+#define LSM6DSOX_REG_WHO_AM_I   0x0F  // Read-only device identification register address
+#define LSM6DSOX_WHO_AM_I_VAL   0x6C  // Fixed factory ID value stored in WHO_AM_I
+#define SINGLE_BYTE_LEN         1     // Number of bytes for register pointer and ID read
 
 int main(void) {
     // I2C test
@@ -38,7 +38,7 @@ int main(void) {
     //    Step A: Write the 1-byte register address (0x0F) to the IMU without sending STOP
     //            so the master holds the bus for a Repeated START
     uint8_t reg_addr = LSM6DSOX_REG_WHO_AM_I;
-    uint8_t who_am_i = 0U;
+    uint8_t who_am_i = 0;
 
     bool tx_ok = i2cSend(&reg_addr, SINGLE_BYTE_LEN, false);
     bool rx_ok = false;
@@ -58,8 +58,6 @@ int main(void) {
     }
 
     while (true) {
-        // Hold execution so you can inspect results in the Debug Terminal
+        // Hold execution so can inspect results in the Debug Terminal
     }
 }
-
-
