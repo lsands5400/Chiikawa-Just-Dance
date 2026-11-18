@@ -11,12 +11,12 @@
 volatile uint32_t numBytesTX = 0; 
 volatile char* dataIn = 0; 
 
-// Clock & GPIO configuration constants (RM0394 Sections 6.4.1, 6.4.27, and Datasheet Table 16)
-#define MSI_RANGE_48MHZ       0xBU      // MSIRANGE = 0b1011 selects 48 MHz MSI clock
-#define I2C1_CLK_SRC_SYSCLK   0x1U      // I2C1SEL  = 0b01 routes SYSCLK to I2C1
-#define GPIO_AF4_I2C1         4U        // AF4 maps PA9/PA10 to I2C1_SCL/I2C1_SDA
-#define I2C_TIMEOUT           100000UL  // Loop guard to prevent infinite hangs on bus errors
-#define I2C_MAX_TRANSFER_SIZE 255U      // Hardware NBYTES[7:0] register limit is 255 bytes
+// Clock & GPIO configuration constants
+#define MSI_RANGE_48MHZ       0xB      // MSIRANGE = 0b1011 selects 48 MHz MSI clock
+#define I2C1_CLK_SRC_SYSCLK   0x1      // I2C1SEL  = 0b01 routes SYSCLK to I2C1
+#define GPIO_AF4_I2C1         4        // AF4 maps PA9/PA10 to I2C1_SCL/I2C1_SDA
+#define I2C_TIMEOUT           100000  // Loop guard to prevent infinite hangs on bus errors
+#define I2C_MAX_TRANSFER_SIZE 255      // Hardware NBYTES[7:0] register limit is 255 bytes
 
 // I2C_TIMINGR parameters for f_I2CCLK = 48 MHz, Fast Mode (400 kHz):
 // Derived from RM0394 Table 183 and adjusted to meet LSM6DSOX Datasheet Table 6:
@@ -25,11 +25,11 @@ volatile char* dataIn = 0;
 //   t_SCLH   = (SCLH + 1)  * 125 ns = (4 + 1)  * 125 ns = 625 ns  (>= 600 ns min in Table 6)
 //   t_SDADEL = SDADEL      * 125 ns = 3        * 125 ns = 375 ns  (within 0..900 ns in Table 6)
 //   t_SCLDEL = (SCLDEL + 1)* 125 ns = (3 + 1)  * 125 ns = 500 ns  (>= 100 ns min in Table 6)
-#define I2C_PRESC_48MHZ       5U
-#define I2C_SCLL_48MHZ        0xAU
-#define I2C_SCLH_48MHZ        0x4U
-#define I2C_SDADEL_48MHZ      0x3U
-#define I2C_SCLDEL_48MHZ      0x3U
+#define I2C_PRESC_48MHZ       5
+#define I2C_SCLL_48MHZ        0xA
+#define I2C_SCLH_48MHZ        0x4
+#define I2C_SDADEL_48MHZ      0x3
+#define I2C_SCLDEL_48MHZ      0x3
 
 void setI2CCLK(void) {
   // 1. Turn on the internal MSI oscillator and wait until it stabilizes
@@ -80,21 +80,16 @@ void initI2C(void) {
   // 4. Configure f_I2CCLK = 48 MHz before enabling I2C1
   setI2CCLK();
 
-  // 5. Follow RM0394 Figure 355 I2C initialization sequence:
-  //    Clear PE bit in I2C_CR1
+  // 5. Clear PE bit in I2C_CR1
   I2C1->CR1 &= ~I2C_CR1_PE;
 
   // Enable analog noise filter (ANFOFF = 0) and disable digital filter (DNF = 0)
   I2C1->CR1 &= ~(I2C_CR1_ANFOFF | I2C_CR1_DNF);
 
   // Load 400 kHz Fast Mode timing values into I2C_TIMINGR
-  // Configure PRESC[3:0], SDADEL[3:0], SCLDEL[3:0],
-    // SCLH[7:0], SCLL[7:0] in I2C_TIMINGR
-  // These values are based on Table 183 in the MCU 
-  // reference manual. It has example timing setting for 
-  // fI2CCLK = 48MHz with fast-mode on
-  // TODO: Fix this values to fit in the required ranges
-  // in 6 of the LSM6DSOX datasheet 
+  // Configure PRESC[3:0], SDADEL[3:0], SCLDEL[3:0], SCLH[7:0], SCLL[7:0] in I2C_TIMINGR
+  // These values are based on Table 183 in the MCU reference manual. It has example timing setting for 
+  // fI2CCLK = 48MHz with fast-mode on. Set these values to fit in the required ranges in Table 6 of the LSM6DSOX datasheet 
   I2C1->TIMINGR = (I2C_PRESC_48MHZ  << I2C_TIMINGR_PRESC_Pos)  |
                   (I2C_SCLL_48MHZ   << I2C_TIMINGR_SCLL_Pos)   |
                   (I2C_SCLH_48MHZ   << I2C_TIMINGR_SCLH_Pos)   |
@@ -114,7 +109,7 @@ void initI2C(void) {
 void i2cMasterMode(uint8_t slave_addr) {
   // Master initialization
   // Addressing mode (7-bit or 10-bit): ADD10
-  // The IMU has a 7-bit address
+  // NOTE: The IMU has a 7-bit address
   I2C1->CR2 &= ~I2C_CR2_ADD10;
 
   // Slave address to be sent
@@ -126,16 +121,16 @@ void i2cMasterMode(uint8_t slave_addr) {
   // Add note: In 7-bit mode, the hardware places the 7-bit address in SADD[7:1] (bit 0 is ignored),
   // so we shift 'slave_addr' left by 1 bit before writing to CR2
   I2C1->CR2 &= ~I2C_CR2_SADD_Msk;
-  I2C1->CR2 |= (((uint32_t)slave_addr << 1U) & I2C_CR2_SADD_Msk);
+  I2C1->CR2 |= (((uint32_t)slave_addr << 1) & I2C_CR2_SADD_Msk);
 }
 
-// Master transmitter protocol (RM0394 Figure 369)
+// Master transmitter protocol 
 bool i2cSend(const uint8_t *send, uint32_t size, bool send_stop) {
-  if ((send == 0) || (size == 0U) || (size > I2C_MAX_TRANSFER_SIZE)) {
+  if ((send == 0) || (size == 0) || (size > I2C_MAX_TRANSFER_SIZE)) {
     return false;
   }
 
-  uint32_t numBytesTX = 0U;
+  uint32_t numBytesTX = 0;
   uint32_t timeout = I2C_TIMEOUT;
 
   // Set transfer direction to Write (RD_WRN = 0)
@@ -167,11 +162,11 @@ bool i2cSend(const uint8_t *send, uint32_t size, bool send_stop) {
     // When TXDR is ready for the next byte, write it to the transmit data register
     if (I2C1->ISR & I2C_ISR_TXIS) {
       I2C1->TXDR = send[numBytesTX];
-      numBytesTX += 1U;
+      numBytesTX += 1;
       timeout = I2C_TIMEOUT;
     }
 
-    if (--timeout == 0U) {
+    if (--timeout == 0) {
       return false;
     }
   }
@@ -181,7 +176,7 @@ bool i2cSend(const uint8_t *send, uint32_t size, bool send_stop) {
   if (send_stop) {
     // Wait for hardware to finish sending the automatic STOP condition, then clear STOPF
     while (!(I2C1->ISR & I2C_ISR_STOPF)) {
-      if (--timeout == 0U) {
+      if (--timeout == 0) {
         return false;
       }
     }
@@ -190,7 +185,7 @@ bool i2cSend(const uint8_t *send, uint32_t size, bool send_stop) {
     // Wait for Transfer Complete (TC = 1), indicating all bytes shifted out and bus is ready
     // for i2cReceive() to issue a Repeated START
     while (!(I2C1->ISR & I2C_ISR_TC)) {
-      if (--timeout == 0U) {
+      if (--timeout == 0) {
         return false;
       }
     }
@@ -199,13 +194,13 @@ bool i2cSend(const uint8_t *send, uint32_t size, bool send_stop) {
   return true;
 }
 
-// Master receiver protocol (RM0394 Figure 372)
+// Master receiver protocol 
 bool i2cReceive(uint8_t *dataIn, uint32_t size) {
-  if ((dataIn == 0) || (size == 0U) || (size > I2C_MAX_TRANSFER_SIZE)) {
+  if ((dataIn == 0) || (size == 0) || (size > I2C_MAX_TRANSFER_SIZE)) {
     return false;
   }
 
-  uint32_t numBytesRX = 0U;
+  uint32_t numBytesRX = 0;
   uint32_t timeout = I2C_TIMEOUT;
 
   // Set transfer direction to Read (RD_WRN = 1) and enable AUTOEND to send NACK + STOP
@@ -228,11 +223,11 @@ bool i2cReceive(uint8_t *dataIn, uint32_t size) {
 
     if (I2C1->ISR & I2C_ISR_RXNE) {
       dataIn[numBytesRX] = (uint8_t)I2C1->RXDR;
-      numBytesRX += 1U;
+      numBytesRX += 1;
       timeout = I2C_TIMEOUT;
     }
 
-    if (--timeout == 0U) {
+    if (--timeout == 0) {
       return false;
     }
   }
@@ -240,7 +235,7 @@ bool i2cReceive(uint8_t *dataIn, uint32_t size) {
   // Wait for the automatic STOP condition to complete and clear STOPF
   timeout = I2C_TIMEOUT;
   while (!(I2C1->ISR & I2C_ISR_STOPF)) {
-    if (--timeout == 0U) {
+    if (--timeout == 0) {
       return false;
     }
   }
