@@ -1,5 +1,4 @@
-// Lindsey Sands & Tiffany Nguyen
-// lsands@g.hmc.edu, tiffnguyen@g.hmc.edu
+//=============I2C Connection ONLY===========================
 // main.c
 // Verifies the physical and protocol-level I2C connection between the STM32L432KC
 // and the Adafruit LSM6DSOX by reading the WHO_AM_I register (0x0F -> 0x6C).
