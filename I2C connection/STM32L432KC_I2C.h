@@ -1,5 +1,3 @@
-// Lindsey Sands & Tiffany Nguyen
-// lsands@g.hmc.edu, tiffnguyen@g.hmc.edu
 // STM32L432KC_I2C.h
 // Header for I2C functions
 
