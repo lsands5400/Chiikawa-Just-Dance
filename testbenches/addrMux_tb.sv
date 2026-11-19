@@ -11,7 +11,7 @@ module addrMux_tb();
 		.addr1(addr1), 
         .addr2(addr2), 
 
-        .addrOut(addrOut), 
+        .addrOut(addrOut)
     );
 
 	// generate clock
@@ -22,19 +22,19 @@ module addrMux_tb();
 
     initial begin
 	addrSel = 0;
-    addr1 = 0x00;
-    addr2 = 0x01;
+    addr1 = 1'b1;
+    addr2 = 1'b0;
 	
 	#10;                        // wait required time
-	assert (addrOut == 0x00)       // check outputs
+	assert (addrOut == 8'h00)       // check outputs
 	else 
 		$error("Address Mux test 1 failed."); 
 	
 	addrSel = 1;
 	#10;                        // wait required time
-	assert (addrOut == 0x01)       // check outputs
+	assert (addrOut == 8'h01)       // check outputs
 	else 
 		$error("Address Mux test 2 failed."); 
+    $finish;
     end
-    $finish
 endmodule

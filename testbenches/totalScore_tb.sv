@@ -3,10 +3,10 @@
 // 11-15-2026
 // This is the testbench for the totalScore module.  
 module totalScore_tb();
-    logic 		currScore;
-    logic       scoreAddend;
-    logic       total;
-	logic 		addrSel;
+    logic[16:0] 		currScore;
+    logic[13:0]       scoreAddend;
+    logic[16:0]       total;
+	logic 		addrSel, clk;
     
     totalScore dut (
 		.currScore(currScore), 
@@ -43,6 +43,6 @@ module totalScore_tb();
 	assert (total == 2000)       // check outputs
 	else 
 		$error("Total score test 3 failed."); 
+    $finish;
     end
-    $finish
 endmodule

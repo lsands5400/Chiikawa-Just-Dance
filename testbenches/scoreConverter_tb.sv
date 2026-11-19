@@ -4,9 +4,9 @@
 // This is the testbench for the scoreConverter module.  
 module scoreConverter_tb();
     logic 		clk, same, addrSel;
-    logic       chars;
-    logic       comboIn, comboOut;
-    logic       scoreAddend;
+    logic [79:0]       chars;
+    logic [3:0]       comboIn, comboOut;
+    logic [13:0]      scoreAddend;
     
     scoreConverter dut (
 		.clk(clk), 
@@ -16,7 +16,7 @@ module scoreConverter_tb();
 
         .addrSel(addrSel),
         .scoreAddend(scoreAddend),
-        .comboOut(comboOut), 
+        .comboOut(comboOut)
     );
 
 	// generate clock
@@ -28,31 +28,31 @@ module scoreConverter_tb();
     initial begin
     comboIn = 0;
     same = 0;
-    chars = 0'h50_65_72_66_65_63_74;
+    chars = 80'h50_65_72_66_65_63_74_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 3000)       // check outputs
 	else 
 		$error("Score converter test 1 failed."); 
 
-    chars = 0'h47_6F_6F_64;
+    chars = 80'h47_6F_6F_64_20_20_20_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 2000)       // check outputs
 	else 
 		$error("Score converter test 2 failed."); 
 	
-	chars = 0'h4F_4B;
+	chars = 80'h4F_4B_20_20_20_20_20_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 1000)       // check outputs
 	else 
 		$error("Score converter test 3 failed.");
 
-    chars = 0'h4D_69_73_73;
+    chars = 80'h4D_69_73_73_20_20_20_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 0)       // check outputs
 	else 
 		$error("Score converter test 4 failed."); 
 
-    chars = 0'h50_65_72_66_65_63_74;
+    chars = 80'h50_65_72_66_65_63_74_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 3000)       // check outputs
 	else 
@@ -62,7 +62,7 @@ module scoreConverter_tb();
 		$error("Score converter test 5b failed.");
 
     comboIn = 1;
-    chars = 0'h50_65_72_66_65_63_74;
+    chars = 80'h50_65_72_66_65_63_74_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 3000)       // check outputs
 	else 
@@ -72,10 +72,10 @@ module scoreConverter_tb();
 		$error("Score converter test 6b failed.");
 
     comboIn = 1;
-    same = 1;
-    chars = 0'h50_65_72_66_65_63_74;
+		same = 1;
+    chars = 80'h50_65_72_66_65_63_74_20_20_20;
 	#10;                        // wait required time
-	assert (scoreAddend == 3000)       // check outputs
+	assert (scoreAddend == 6000)       // check outputs
 	else 
 		$error("Score converter test 7 failed."); 
     assert (comboOut == 2)       // check outputs
@@ -84,7 +84,7 @@ module scoreConverter_tb();
 
     comboIn = 2;
     same = 0;
-    chars = 0'h50_65_72_66_65_63_74;
+    chars = 80'h50_65_72_66_65_63_74_20_20_20;
 	#10;                        // wait required time
 	assert (scoreAddend == 3000)       // check outputs
 	else 
@@ -95,14 +95,14 @@ module scoreConverter_tb();
 
     comboIn = 2;
     same = 1;
-    chars = 0'h50_65_72_66_65_63_74;
+    chars = 80'h50_65_72_66_65_63_74_20_20_20;
 	#10;                        // wait required time
-	assert (scoreAddend == 6000)       // check outputs
+	assert (scoreAddend == 9000)       // check outputs
 	else 
 		$error("Score converter test 8 failed."); 
     assert (comboOut == 3)       // check outputs
 	else 
 		$error("Score converter test 8b failed.");
+		$finish;
     end
-    $finish
 endmodule

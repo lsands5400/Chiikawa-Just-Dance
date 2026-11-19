@@ -34,10 +34,10 @@ module songFSM(input logic songSelect,
                 else begin
                     nextstate = S1;
                 end
-                if (start) begin
-                    song = 0;
-                    songSelLCD = //TODO: decide LCD message
-                end
+                // if (start) begin
+                    // song = 0;
+                    // songSelLCD = //TODO: decide LCD message
+                // end
             S2:
                 if (songSelect) begin
                     nextstate = S0;
@@ -45,10 +45,10 @@ module songFSM(input logic songSelect,
                 else begin
                     nextstate = S2;
                 end
-                if (start) begin
-                    song = 1;
-                    songSelLCD = //TODO: decide LCD message
-                end
+                // if (start) begin
+                    // song = 1;
+                    // songSelLCD = //TODO: decide LCD message
+                // end
         endcase
 
 endmodule

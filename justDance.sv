@@ -5,6 +5,17 @@
 module justDance(input logic start,
                     input logic category, 
                     output logic lcd);
+
+    logic addrSel, addr1, addr2, addr;
+    logic din, dout;
+    logic write_en, clk, sameAsLast;
+    logic dataIn, dataOut;
+    logic chars;
+    logic scoreAddend, comboOut;
+    logic currScore, totalScore;
+    logic dots, scoreDots, comboDots, stringDots;
+    logic LCD;
+
     
     // Address select
     addrMux(addrSel, addr1, addr2, addr);
@@ -15,7 +26,7 @@ module justDance(input logic start,
     // clock 
     // TODO: Implement this
 
-    synchronizer(clk,dataIn, sameAsLast, dataOut);
+    synchronizer(clk, dataIn, sameAsLast, dataOut);
 
     // Receive char[]
     // TODO: Implement this
@@ -27,15 +38,12 @@ module justDance(input logic start,
     // Add to total score
     totalScore ts(currScore, scoreAddend, totalScore);
 
-    // Convert char[] to the display dot values
-    decodeCharArr dca(chars, dots);
-
     // Convert each score to the display dot value
     decodeScoreLCD dsl(totalScore, scoreDots);
 
     // Convert each score to the display dot value
     decodeScoreLCD ds2(comboOut, comboDots);
 
-    display d(scoreDots, comboDots, stringDots, LCD);
+    display d(scoreDots, comboDots, category, LCD);
 
 endmodule

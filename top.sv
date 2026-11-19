@@ -8,6 +8,9 @@ module top(input logic start,
             
             output logic gameStart,
             output logic lcd);
+    logic songSelLCD, jdLCD;
+    logic song;
+    
     lcdMux lm(start, songSelLCD, jdLCD, lcd);
     songFSM sf(songSelect, song, songSelLCD);
     justDance jd(start, category, jdLCD);
