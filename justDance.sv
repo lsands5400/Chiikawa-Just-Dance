@@ -13,8 +13,9 @@ module justDance(input logic start,
     logic chars;
     logic scoreAddend, comboOut;
     logic currScore, totalScore;
-    logic dots, scoreDots, comboDots, stringDots;
-    logic LCD;
+    logic[39:0] scoreDots, comboDots, 
+    logic[79:0] stringDots;
+    logic lcd;
 
     
     // Address select
@@ -42,8 +43,8 @@ module justDance(input logic start,
     decodeScoreLCD dsl(totalScore, scoreDots);
 
     // Convert each score to the display dot value
-    decodeScoreLCD ds2(comboOut, comboDots);
+    decodeScoreLCD dsl2(comboOut, comboDots);
 
-    display d(scoreDots, comboDots, category, LCD);
+    display d(scoreDots, comboDots, category, lcd);
 
 endmodule

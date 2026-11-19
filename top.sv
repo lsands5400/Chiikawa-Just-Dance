@@ -4,14 +4,13 @@
 // This is the top module for the Chiikawa Just Dance game. 
 module top(input logic start, 
             input logic songSelect, 
-            input logic category,
+            input logic[79:0] category,
             
-            output logic gameStart,
-            output logic lcd);
-    logic songSelLCD, jdLCD;
+            output logic[319:0] lcd);
+    logic[319:0] songSelLCD, jdLCD;
     logic song;
     
-    lcdMux lm(start, songSelLCD, jdLCD, lcd);
+    lcdMux lm(start, jdLCD, songSelLCD, lcd);
     songFSM sf(songSelect, song, songSelLCD);
     justDance jd(start, category, jdLCD);
 endmodule
