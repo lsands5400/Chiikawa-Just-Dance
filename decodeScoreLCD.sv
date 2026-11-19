@@ -1,36 +1,33 @@
-// Lindsey Sands
-// lsands@g.hmc.edu
-// 11-14-2026
-// This is the LCD decoder module for numbers
+// Converts a 17-bit binary score into six ASCII decimal digits.
 module decodeScoreLCD (
-    input  logic [15:0] score,
-    output logic [39:0] b
+    input  logic [16:0] score,
+    output logic [47:0] b
 );
 
-    logic [19:0] bcd;
+    logic [23:0] bcd;
     integer i, j;
 
     always_comb begin
 
-        // Initialize BCD
-        bcd = 20'b0;
+        bcd = 24'b0;
 
-        // Double Dabble algorithm
-        for (i = 15; i >= 0; i = i - 1) begin
+        // Double Dabble
+        for (i = 16; i >= 0; i = i - 1) begin
 
-            // Add 3 to BCD digits >= 5
-            for (j = 0; j < 5; j = j + 1) begin
+            // Correct each BCD digit before shifting.
+            for (j = 0; j < 6; j = j + 1) begin
                 if (bcd[j*4 +: 4] >= 5)
                     bcd[j*4 +: 4] =
                         bcd[j*4 +: 4] + 4'd3;
             end
 
-            // Shift in next binary bit
-            bcd = {bcd[18:0], score[i]};
+            // Shift in the next binary bit.
+            bcd = {bcd[22:0], score[i]};
 
         end
 
-        // Convert BCD digits to ASCII
+        // Convert each BCD digit into ASCII.
+        b[47:40] = {4'h3, bcd[23:20]};
         b[39:32] = {4'h3, bcd[19:16]};
         b[31:24] = {4'h3, bcd[15:12]};
         b[23:16] = {4'h3, bcd[11:8]};

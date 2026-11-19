@@ -7,5 +7,4 @@ module totalScore(input logic[16:0] currScore,
                     output logic addrSel,
                     output logic[16:0] total);
     assign total = currScore + scoreAddend;
-    assign addrSel = 1;
 endmodule

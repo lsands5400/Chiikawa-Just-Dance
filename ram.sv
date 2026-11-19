@@ -10,6 +10,6 @@ module ram (din, addr, write_en, clk, dout);// 512x8
     always @(posedge clk) begin
         if (write_en)
             mem[(addr)] <= din;
-        dout = mem[addr]; // Output register controlled by clock.
+        dout <= mem[addr]; // Output register controlled by clock.
     end
 endmodule
