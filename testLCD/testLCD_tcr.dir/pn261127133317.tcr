@@ -1,0 +1,50 @@
+#Start recording tcl command: 11/27/2026 10:42:13
+#Project Location: C:/Users/lindz/my_designs/testLCD; Project name: testLCD
+prj_create -name "testLCD" -impl "testLCD" -dev iCE40UP5K-SG48I -performance "High-Performance_1.2V" -synthesis "lse"
+file copy -force -- "C:/Users/lindz/OneDrive/Documents/e155/project/addrMux.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/categoryCDC.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/decodeScoreLCD.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/display.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/gameFSM.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD"
+file copy -force -- "C:/Users/lindz/OneDrive/Documents/e155/project/justDance.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/lcdMux.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/ram.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/scoreConverter.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/songFSM.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD"
+file copy -force -- "C:/Users/lindz/OneDrive/Documents/e155/project/spiReceiver.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/synchronizer.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/top.sv" "C:/Users/lindz/OneDrive/Documents/e155/project/totalScore.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD"
+prj_add_source "C:/Users/lindz/my_designs/testLCD/source/testLCD/addrMux.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/categoryCDC.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/decodeScoreLCD.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/display.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/gameFSM.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/justDance.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/lcdMux.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/ram.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/scoreConverter.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/songFSM.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/spiReceiver.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/synchronizer.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/top.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/totalScore.sv"
+prj_save 
+prj_add_source "C:/Users/lindz/my_designs/testLCD/source/testLCD/lcd_hello_world.sv"
+prj_remove_source "C:/Users/lindz/my_designs/testLCD/source/testLCD/addrMux.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/categoryCDC.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/decodeScoreLCD.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/display.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/gameFSM.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/justDance.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/lcdMux.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/ram.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/scoreConverter.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/songFSM.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/spiReceiver.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/synchronizer.sv"
+prj_remove_source "C:/Users/lindz/my_designs/testLCD/source/testLCD/totalScore.sv"
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Synthesis -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_set_impl_opt -impl "testLCD" {top} {top}
+prj_run Synthesis -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Synthesis -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Synthesis -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Synthesis -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Synthesis -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_add_source "C:/Users/lindz/my_designs/testLCD/testLCD/testLcd.pdc"
+prj_enable_source "C:/Users/lindz/my_designs/testLCD/testLCD/testLcd.pdc"
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Map -impl testLCD
+prj_run PAR -impl testLCD
+prj_run Export -impl testLCD
+prj_run Export -impl testLCD
+prj_save 
+prj_close
+#Stop recording: 11/27/2026 13:33:17

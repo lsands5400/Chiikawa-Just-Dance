@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userSetting name="C:/Users/lindz/my_designs/testLCD/promote.xml" version="Diamond (64-bit) 2026.1.0.37.0" date="Fri Nov 27 11:41:23 2026" vendor="Lattice Semiconductor Corporation" >
+  <msg mid="2043137" type="Error" internal="true" />
+  <msg mid="2043072" type="Error" internal="true" />
+  <msg mid="2043128" type="Error" internal="true" />
+  <msg mid="2043018" type="Info" internal="true" />
+  <msg mid="35901209" type="Warning" internal="true" />
+  <msg mid="2043330" type="Warning" internal="true" />
+  <msg mid="2043927" type="Warning" internal="true" />
+  <msg mid="2043328" type="Info" internal="true" />
+  <msg mid="2044320" type="Info" internal="true" />
+  <msg mid="2043063" type="Warning" internal="true" />
+  <msg mid="35901328" type="Info" internal="true" />
+  <msg mid="35931002" type="Warning" internal="true" />
+  <msg mid="2043202" type="Error" internal="true" />
+  <msg mid="35901202" type="Error" internal="true" />
+  <msg mid="2044561" type="Info" internal="true" />
+</userSetting>

@@ -1,0 +1,94 @@
+(* \db:architecture ="iCE40UP" ,
+   \db:device ="iCE40UP5K" ,
+   \db:package ="SG48" ,
+   \db:speed ="High-Performance_1.2V" ,
+   \db:timestamp ="1795799271" *)
+module \top  (
+    input \reset ,
+    output \lcd_rs ,
+    output \lcd_rw ,
+    output \lcd_e ,
+    output [3:0] \lcd_db );
+
+    wire \GND_net ;
+
+    wire \lcd_db_pad[2].vcc ;
+
+    (* \dm:primitive ="VLO" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \VLO  \i5 (
+      .\Z (\GND_net ));
+
+    (* \dm:primitive ="VHI" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \VHI  \lcd_db_pad[2].vhi_inst (
+      .\Z (\lcd_db_pad[2].vcc ));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_db_pad[2].bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_db [2]));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_db_pad[3].bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_db [3]));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_e_pad.bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_e ));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_db_pad[1].bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_db [1]));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_rw_pad.bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_rw ));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_rs_pad.bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_rs ));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \reset_pad.bb_inst (
+      .\T_N (\GND_net ),
+      .\B (\reset ),
+      .\I (1'b0));
+
+    (* \dm:primitive ="BB_B" ,
+       \dm:programming ="" ,
+       \dm:user ="0" *)
+    \BB_B  \lcd_db_pad[0].bb_inst (
+      .\T_N (\lcd_db_pad[2].vcc ),
+      .\I (\GND_net ),
+      .\B (\lcd_db [0]));
+
+endmodule
+

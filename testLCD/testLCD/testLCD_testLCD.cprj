@@ -1,0 +1,8 @@
+-ver "C:/lscc/radiant/2026.1/ip/pmi/pmi_iCE40UP.v"
+-lib pmi -vhd "C:/lscc/radiant/2026.1/ip/pmi/pmi_iCE40UP.vhd"
+-sver "C:/Users/lindz/my_designs/testLCD/source/testLCD/top.sv" "C:/Users/lindz/my_designs/testLCD/source/testLCD/lcd_hello_world.sv"
+-path "C:/Users/lindz/my_designs/testLCD" "C:/Users/lindz/my_designs/testLCD"
+-top top
+-isTop
+-a "iCE40UP"
+-t "iCE40UP5K"

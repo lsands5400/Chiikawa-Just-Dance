@@ -1,0 +1,91 @@
+(DELAYFILE
+  (SDFVERSION "3.0")
+  (DESIGN "top")
+  (DATE "Fri Nov 27 11:41:23 2026")
+  (VENDOR "Lattice")
+  (PROGRAM "backanno")
+  (VERSION "Radiant Software (64-bit) 2026.1.0.37.0")
+  (DIVIDER /)
+  (VOLTAGE 1.26:1.20:1.14)
+  (PROCESS "default")
+  (TEMPERATURE -40:25:85)
+  (TIMESCALE 1ps)
+  (CELL
+    (CELLTYPE "lcd_db_2_")
+    (INSTANCE lcd_db\[2\]_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcddb2 (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "lcd_db_3_")
+    (INSTANCE lcd_db\[3\]_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcddb3 (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "lcd_e")
+    (INSTANCE lcd_e_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcd_e (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "lcd_db_1_")
+    (INSTANCE lcd_db\[1\]_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcddb1 (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "lcd_rw")
+    (INSTANCE lcd_rw_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcd_rw (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "lcd_rs")
+    (INSTANCE lcd_rs_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcd_rs (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "lcd_db_0_")
+    (INSTANCE lcd_db\[0\]_I)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH PADDO lcddb0 (1914:2001:2088)(1914:2001:2088))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "top")
+    (INSTANCE )
+    (DELAY
+      (ABSOLUTE
+        (INTERCONNECT SLICE_0/F0 lcd_db\[2\]_I/PADDO (4362:4507:4653)(4362:4507:4653))
+        (INTERCONNECT SLICE_0/F0 lcd_db\[3\]_I/PADDO (4362:4507:4653)(4362:4507:4653))
+        (INTERCONNECT SLICE_0/F0 lcd_e_I/PADDO (4362:4507:4653)(4362:4507:4653))
+        (INTERCONNECT SLICE_0/F0 lcd_db\[1\]_I/PADDO (3622:3827:4032)(3622:3827:4032))
+        (INTERCONNECT SLICE_0/F0 lcd_rw_I/PADDO (4362:4507:4653)(4362:4507:4653))
+        (INTERCONNECT SLICE_0/F0 lcd_rs_I/PADDO (5049:5227:5406)(5049:5227:5406))
+        (INTERCONNECT SLICE_0/F0 lcd_db\[0\]_I/PADDO (5102:5188:5274)(5102:5188:5274))
+      )
+    )
+  )
+)
